@@ -1,0 +1,22 @@
+{
+    "name": "khaled/php-mvc",
+    "description": "MVC design pattern practice.",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App",
+            "Khaled\\PhpMvc\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Khaled Mohsen",
+            "email": "pres.kbayomy@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/var-dumper": "^6.1",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
