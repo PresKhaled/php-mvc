@@ -6,8 +6,8 @@ use Khaled\PhpMvc\http\Connection;
 
 class RegisterController
 {
-    public function index(Connection $connection): void
+    public function create(Connection $connection)
     {
-        echo 'register|' . $connection->method();
+        return view('register');
     }
 }
