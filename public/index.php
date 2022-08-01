@@ -1,12 +1,14 @@
 <?php
 
+use App\Hash;
+
 require_once 'app/helpers.php';
 require_once base_path() . '/vendor/autoload.php';
 require_once base_path() . '/routes/web.php';
 
 app()->run();
 
-$databaseConfig = config('database');
+/*$databaseConfig = config('database');
 $key = 'port.nested.level';
 
 dump(
@@ -17,4 +19,6 @@ dump(
     $databaseConfig->unset($key),
     $databaseConfig->get($key),
     config('database.host'),
-);
+);*/
+
+dump(Hash::passwordVerify('12345', Hash::password('12345')));
