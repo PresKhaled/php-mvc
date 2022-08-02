@@ -37,14 +37,12 @@ $validator2 = new Validator;
 $validator2->make([
     'name' => ['required'],
     'email' => 'required|email',
-    'password' => ['required'],
+    'password' => ['required', 'between:3,5'],
 ], [
     'name' => 'Name',
     'email' => 'email@example.',
-    // 'password' => 'password_',
-], [
-    'password' => 'Custom message.'
-]);
+    'password' => '035',
+], []);
 
 if ($validator->hasErrors()) {
     dump($validator);
