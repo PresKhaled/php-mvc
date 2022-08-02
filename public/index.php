@@ -36,11 +36,11 @@ $validator->make([
 $validator2 = new Validator;
 $validator2->make([
     'name' => ['required'],
-    'email' => 'required',
+    'email' => 'required|email',
     'password' => ['required'],
 ], [
     'name' => 'Name',
-    'email' => 'email@example.com',
+    'email' => 'email@example.',
     // 'password' => 'password_',
 ], [
     'password' => 'Custom message.'
