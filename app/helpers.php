@@ -73,3 +73,19 @@ if (!function_exists('config')) {
         return $config;
     }
 }
+
+if (!function_exists('app_str_class_format')) {
+    function app_str_class_format(string $value): string {
+        $separator = '_';
+
+        return str_replace($separator, '', ucwords($value, $separator));
+    }
+}
+
+/*if (!function_exists('when')) {
+    function when(mixed $value, mixed $conditions): bool {
+        if ($conditions) {
+            return $value;
+        }
+    }
+}*/
