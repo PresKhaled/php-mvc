@@ -3,6 +3,7 @@
 use App\Application;
 use App\Config;
 use App\View;
+use App\WithArrayAccess;
 use Minwork\Helper\Arr;
 
 if (!function_exists('app')) {
@@ -30,7 +31,11 @@ if (!function_exists('views_path')) {
 }
 
 if (!function_exists('view')) {
-    function view(string $path, ?array $params) {
+    /**
+     * @throws Exception
+     */
+    function view(string $path, array $params = []): bool|string
+    {
         return View::make($path, $params);
     }
 }
@@ -94,5 +99,25 @@ if (!function_exists('app_str_class_format')) {
 if (!function_exists('env')) {
     function env(string $key, mixed $default = ''): mixed {
         return ($_ENV[$key] ??= $default);
+    }
+}
+
+if (!function_exists('with_array_access')) {
+    /**
+     * -
+     *
+     * @param array $results
+     * @return WithArrayAccess
+     */
+    function with_array_access(array $results): WithArrayAccess
+    {
+        $withArrayAccess = (new class extends WithArrayAccess {
+            public function __invoke(array $results)
+            {
+                parent::__construct($results);
+            }
+        });
+
+        return $withArrayAccess($results);
     }
 }

@@ -6,7 +6,7 @@ use App\controllers\RegisterController;
 use Khaled\PhpMvc\http\Connection;
 use Khaled\PhpMvc\http\Route;
 
-Route::get('main', [MainController::class, 'show']);
+Route::get('/', [MainController::class, 'show']);
 Route::get('posts', [PostController::class, 'index']);
 Route::get('register', [RegisterController::class, 'create']);
 Route::get('/login', function (Connection $connection) {
