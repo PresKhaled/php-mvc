@@ -3,6 +3,9 @@
 use App\Hash;
 use App\validation\Validator;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+
 require_once 'app/helpers.php';
 require_once base_path() . '/vendor/autoload.php';
 require_once base_path() . '/routes/web.php';
@@ -33,7 +36,7 @@ $validator->make([
     'name' => 'Name',
 ]);*/
 
-$validator2 = new Validator;
+/*$validator2 = new Validator;
 $validator2->make([
         'name' => ['required'],
         'email' => 'required|email',
@@ -47,13 +50,13 @@ $validator2->make([
     attaches: [
         'name' => 'email',
     ],
-);
+);*/
 
 /*if ($validator->hasErrors()) {
     dump($validator);
 }*/
 
-if ($validator2->hasErrors()) {
+/*if ($validator2->hasErrors()) {
     dump($validator2);
-}
+}*/
 

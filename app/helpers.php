@@ -90,3 +90,9 @@ if (!function_exists('app_str_class_format')) {
         }
     }
 }*/
+
+if (!function_exists('env')) {
+    function env(string $key, mixed $default = ''): mixed {
+        return ($_ENV[$key] ??= $default);
+    }
+}
