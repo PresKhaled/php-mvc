@@ -76,7 +76,8 @@ if (!function_exists('config')) {
 
 if (!function_exists('app_str_class_format')) {
     function app_str_class_format(string $value): string {
-        $separator = '_';
+        $value      = (explode(':', $value)[0]);
+        $separator  = '_';
 
         return str_replace($separator, '', ucwords($value, $separator));
     }
