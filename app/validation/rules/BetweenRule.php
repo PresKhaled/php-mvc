@@ -8,7 +8,7 @@ class BetweenRule implements RuleContract
 {
     public array $more = [];
 
-    public function apply(string $field, mixed $value, string $rule): bool
+    public function apply(string $field, mixed $value, string $rule, array $more = []): bool
     {
         $rule       = explode(',', str_replace('between:', '', $rule));
         $length     = strlen($value);

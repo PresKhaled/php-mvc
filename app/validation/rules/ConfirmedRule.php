@@ -4,17 +4,18 @@ namespace App\validation\rules;
 
 use App\contracts\RuleContract;
 
-class RequiredRule implements RuleContract
+class ConfirmedRule implements RuleContract
 {
     public function apply(string $field, mixed $value, string $rule, array $more = []): bool
     {
-        // dump('The name field can reach the value of the email field after it has been attached.', $more['email']);
+        $attachedField = ($field . '_confirmation');
+        $attachedFieldValue = $more[$attachedField];
 
-        return isset($value);
+        return ($value === $attachedFieldValue);
     }
 
     public function message(string $field): string
     {
-        return 'Required: default error message.';
+        return $field;
     }
 }

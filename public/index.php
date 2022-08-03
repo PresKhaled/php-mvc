@@ -24,29 +24,34 @@ dump(
 
 // dump(Hash::passwordVerify('12345', Hash::password('12345')));
 
-$validator = new Validator;
+/*$validator = new Validator;
 $validator->make([
     'name' => 'required',
     'email' => 'required',
     'password' => 'required',
 ], [
     'name' => 'Name',
-]);
+]);*/
 
 $validator2 = new Validator;
 $validator2->make([
-    'name' => ['required'],
-    'email' => 'required|email',
-    'password' => ['required', 'between:3,5'],
-], [
-    'name' => 'Name',
-    'email' => 'email@example.',
-    'password' => '035',
-], []);
+        'name' => ['required'],
+        'email' => 'required|email',
+        'password' => ['required', 'between:3,5', 'confirmed'],
+    ], [
+        'name' => 'Name',
+        'email' => 'email@example.',
+        'password' => '035',
+        'password_confirmation' => '035',
+    ],
+    attaches: [
+        'name' => 'email',
+    ],
+);
 
-if ($validator->hasErrors()) {
+/*if ($validator->hasErrors()) {
     dump($validator);
-}
+}*/
 
 if ($validator2->hasErrors()) {
     dump($validator2);
