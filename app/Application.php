@@ -14,6 +14,7 @@ class Application
 {
     protected Connection $connection;
     protected Response $response;
+    public Session $session;
     protected Route $route;
     public DB $database;
 
@@ -21,6 +22,7 @@ class Application
     {
         $this->connection = new Connection;
         $this->response = new Response;
+        $this->session = new Session;
         $this->route = new Route($this->connection, $this->response);
         $this->database = new DB($this->getDatabaseEngine());
     }
