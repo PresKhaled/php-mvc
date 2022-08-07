@@ -24,10 +24,10 @@ class Route
      *
      *
      * @param string $uri
-     * @param callable|array $action
+     * @param callable|array|string $action
      * @return void
      */
-    public static function get(string $uri, callable|array $action): void {
+    public static function get(string $uri, callable|array|string $action): void {
         $uri = self::turnOnSlash($uri);
 
          self::$routes['get'][$uri] = $action;
@@ -37,10 +37,10 @@ class Route
      *
      *
      * @param string $uri
-     * @param callable|array $action
+     * @param callable|array|string $action
      * @return void
      */
-    public static function post(string $uri, callable|array $action): void {
+    public static function post(string $uri, callable|array|string $action): void {
         $uri = self::turnOnSlash($uri);
 
         self::$routes['post'][$uri] = $action;
@@ -57,9 +57,12 @@ class Route
         $uri = $connection->uri();
         $action = (self::$routes[$method][$uri]) ?? false;
 
-        // Closure
-        if (is_callable($action)) {
-            return call_user_func_array($action, [$connection]);
+        // 404|Not found
+       if (!$action) {
+            $action = function () {
+              header(('Location: ' . env('APP_URL') . '/404'));
+              exit;
+            };
         }
 
         // Controller
@@ -73,6 +76,11 @@ class Route
             }
 
             return call_user_func_array([new $action[0], $action[1]], [$connection]);
+        }
+
+        // Closure/Invokable controller.
+        if (is_callable($action) || is_callable(($action = new $action))) {
+            return call_user_func_array($action, [$connection]);
         }
     }
 
