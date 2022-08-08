@@ -12,38 +12,51 @@ use Minwork\Helper\Arr;
 class RegisterController
 {
     /**
+     * -
+     *
      * @throws Exception
      */
-    #[NoReturn] public function create(Connection $connection): void
+    #[NoReturn] public function create(): void
     {
-        view('register');
+        view('auth.register');
     }
 
-    public function store(Connection $connection)
+    /**
+     * -
+     *
+     * @param Connection $connection
+     * @return void
+     */
+    #[NoReturn] public function store(Connection $connection): void
     {
+        $all = $connection->all();
         $validator = new Validator;
         $validated = $validator->make([
             'name' => 'required',
             'email' => 'required|email',
             'password' => ['required', 'confirmed'],
-        ], $connection->all());
+        ], $all);
 
         if ($validator->hasErrors()) {
-            // dump($validator->errors);
-            app()->session->flash('old', "Welcome {$user->name}");
-            foreach ($validator->errors as $field => $messages) {
-                // dump($field, $messages);
-                app()->session->flash($field, $messages);
-            }
+            // Flash the old values for the applicable fields.
+            Arr::each($all, function (string $field, mixed $value) {
+                if (!in_array($field, OLD_VALUES_NEVER_FLUSH)) {
+                    app()->session->setFlash($field, $value, OLD_VALUES_KEY);
+                }
+            }, Arr::EACH_KEY_VALUE);
 
-            // dump($_SESSION);
+            foreach ($validator->errors as $field => $messages) {
+                app()->session->setFlash($field, $messages);
+            }
 
             back();
         }
 
+        $validated['password'] = bcrypt($validated['password']);
+
         $user = User::create($validated);
 
-        app()->session->flash('registered', "Welcome {$user->name}");
+        app()->session->setFlash('registered', "Welcome $user->name");
 
         back();
     }
