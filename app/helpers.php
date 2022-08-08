@@ -4,10 +4,13 @@ use App\Application;
 use App\Config;
 use App\View;
 use App\WithArrayAccess;
+use JetBrains\PhpStorm\NoReturn;
+use Khaled\PhpMvc\http\Connection;
 use Minwork\Helper\Arr;
 
 if (!function_exists('app')) {
-    function app() {
+    function app(): ?Application
+    {
         static $app = null;
 
         if (!$app) {
@@ -19,14 +22,23 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('base_path')) {
-    function base_path() {
+    function base_path(): string
+    {
         return __DIR__ . '/../';
     }
 }
 
 if (!function_exists('views_path')) {
-    function views_path() {
+    function views_path(): string
+    {
         return base_path() . '/views';
+    }
+}
+
+if (!function_exists('parts_path')) {
+    function parts_path(): string
+    {
+        return base_path() . '/views/layouts/parts';
     }
 }
 
@@ -34,14 +46,16 @@ if (!function_exists('view')) {
     /**
      * @throws Exception
      */
-    function view(string $path, array $params = []): bool|string
+    #[NoReturn] function view(string $path, array $params = []): void
     {
-        return View::make($path, $params);
+        echo View::make($path, $params);
+        exit;
     }
 }
 
 if (!function_exists('config_path')) {
-    function config_path() {
+    function config_path(): string
+    {
         return base_path() . '/config';
     }
 }
@@ -119,5 +133,31 @@ if (!function_exists('with_array_access')) {
         });
 
         return $withArrayAccess($results);
+    }
+}
+
+if (!function_exists('connection')) {
+    function connection(): Connection
+    {
+        return app()->connection;
+    }
+}
+
+if (!function_exists('back')) {
+    #[NoReturn] function back(): void
+    {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+}
+
+if (!function_exists('old')) {
+    function old(string $name): string
+    {
+        if (app()->session->has($name, true, true)) {
+            return app()->session->get($name, true, true);
+        }
+
+        return '';
     }
 }

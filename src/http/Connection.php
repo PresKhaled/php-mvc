@@ -13,4 +13,13 @@ class Connection
 
         return explode('?', $uri)[0] ?? $uri;
     }
+
+    public function all(): array {
+        return $_POST;
+    }
+
+    public function get(string $key): string
+    {
+        return $this->all()[$key] ??= '';
+    }
 }

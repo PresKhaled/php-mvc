@@ -13,10 +13,12 @@ class Validator
      * @param array $data
      * @param array|null $messages
      * @param array $attaches Enable a field to access the value of another field.
-     * @return void
+     * @return array
      */
-    public function make(array $fullRules, array $data, ?array $messages = [], array $attaches = []): void
+    public function make(array $fullRules, array $data, ?array $messages = [], array $attaches = []): array
     {
+        $validated = [];
+
         foreach ($fullRules as $field => $rules) {
             if (is_string($rules)) {
                 $rules = explode('|', $rules);
@@ -36,9 +38,17 @@ class Validator
 
                 if (!$valid) {
                     $this->errors[$field][] = $messages[$field] ??= $rule->message($field);
+                    continue;
+                }
+
+                // Avoid adding the field to the validated array if the field has another invalid rule.
+                if (!isset($this->errors[$field])) {
+                    $validated[$field] = $value;
                 }
             }
         }
+
+        return $validated;
     }
 
     /**
@@ -69,6 +79,6 @@ class Validator
      */
     public function hasErrors(): bool
     {
-        return isset($this->errors);
+        return !empty($this->errors);
     }
 }

@@ -51,7 +51,8 @@ class Route
      *
      * @throws Exception
      */
-    public function resolve() {
+    public function resolve(): mixed
+    {
         $connection = $this->connection;
         $method = $connection->method();
         $uri = $connection->uri();
@@ -59,10 +60,8 @@ class Route
 
         // 404|Not found
        if (!$action) {
-            $action = function () {
-              header(('Location: ' . env('APP_URL') . '/404'));
-              exit;
-            };
+           header(('Location: ' . env('APP_URL') . '/404'));
+           exit;
         }
 
         // Controller

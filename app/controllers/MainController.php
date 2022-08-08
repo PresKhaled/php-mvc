@@ -2,9 +2,15 @@
 
 namespace App\controllers;
 
+use Exception;
+use JetBrains\PhpStorm\NoReturn;
+
 class MainController
 {
-    public function show() {
-        return view('path.to/main');
+    /**
+     * @throws Exception
+     */
+    #[NoReturn] public function show(): void {
+        view('path.to/main');
     }
 }

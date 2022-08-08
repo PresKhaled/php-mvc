@@ -12,8 +12,8 @@ use Khaled\PhpMvc\http\Route;
 
 class Application
 {
-    protected Connection $connection;
-    protected Response $response;
+    public Connection $connection;
+    public Response $response;
     public Session $session;
     protected Route $route;
     public DB $database;
@@ -32,8 +32,10 @@ class Application
      */
     public function run(): void
     {
-        $this->route->resolve();
         $this->database->init();
+        $this->route->resolve();
+
+        // ob_implicit_flush(false);
     }
 
     private function getDatabaseEngine(): DatabaseManager

@@ -84,12 +84,10 @@ class MysqlManager implements DatabaseManager
         }
 
         $query = MysqlGrammer::buildGetQuery($columns, array_keys($filters));
-        dump($query);
         $statement = self::$instance->prepare($query);
 
         if (!empty($filters)) {
             foreach (array_values($filters) as $index => $filterColumn) {
-                dump($filterColumn);
                 $statement->bindValue(($index + 1), $filterColumn);
             }
         }

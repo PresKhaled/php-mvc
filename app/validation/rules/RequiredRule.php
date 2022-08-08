@@ -10,7 +10,7 @@ class RequiredRule implements RuleContract
     {
         // dump('The name field can reach the value of the email field after it has been attached.', $more['email']);
 
-        return isset($value);
+        return (bool)$value;
     }
 
     public function message(string $field): string

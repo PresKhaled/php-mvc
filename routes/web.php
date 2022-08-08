@@ -38,6 +38,7 @@ Route::get('/invoke', InvokableController::class);
 //});
 Route::get('posts', [PostController::class, 'index']);
 Route::get('register', [RegisterController::class, 'create']);
+Route::post('register', [RegisterController::class, 'store']);
 Route::get('/login', function (Connection $connection) {
     echo 'login|' . $connection->method();
 });

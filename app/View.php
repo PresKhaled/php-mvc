@@ -23,14 +23,32 @@ class View
             throw new Exception("Target view (file): '$path' not found.");
         }
 
-        foreach ($params as $key => $value) {
-            $$key = $value;
-        }
+        $layout = self::getLayout();
+        $viewContent = self::getViewContent($path, $params);
+        // dump($layout, $viewContent, str_replace('{{CONTENT}}', $viewContent, $layout));
+
+        $count = 1;
+
+        return str_replace('{{CONTENT}}', $viewContent, $layout, $count);
+    }
+
+    // NOTE: Not working properly in PHP 8.1.8 nor 8.1.9
+    protected static function getLayout(): bool|string
+    {
+        ob_start();
+
+        require_once (views_path() . '/layouts/main.php');
+
+        return ob_get_clean();
+    }
+
+    protected static function getViewContent(string $path, array $params): bool|string {
+        extract($params);
 
         ob_start();
 
         require_once $path;
 
-        return ob_get_contents();
+        return ob_get_clean();
     }
 }

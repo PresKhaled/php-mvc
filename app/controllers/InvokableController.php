@@ -3,14 +3,15 @@
 namespace App\controllers;
 
 use Exception;
+use JetBrains\PhpStorm\NoReturn;
 
 class InvokableController
 {
     /**
      * @throws Exception
      */
-    public function __invoke(): bool|string
+    #[NoReturn] public function __invoke(): void
     {
-        return view('invoked');
+        view('invoked');
     }
 }
