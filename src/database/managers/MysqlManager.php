@@ -3,10 +3,10 @@
 namespace Khaled\PhpMvc\database\managers;
 
 use App\contracts\DatabaseManager;
-use App\Model;
-use App\WithArrayAccess;
+use App\models\Model;
 use Exception;
-use Khaled\PhpMvc\database\grammers\MysqlGrammer;
+use Khaled\PhpMvc\database\grammars\MysqlGrammar;
+use Khaled\PhpMvc\support\WithArrayAccess;
 use Minwork\Helper\Arr;
 use PDO;
 use Throwable;
@@ -15,6 +15,11 @@ class MysqlManager implements DatabaseManager
 {
     protected static PDO $instance;
 
+    /**
+     * -
+     *
+     * @return PDO
+     */
     public function connect(): PDO
     {
         $database = env('DB_ENGINE');
@@ -31,7 +36,13 @@ class MysqlManager implements DatabaseManager
         return self::$instance;
     }
 
+
     /**
+     * -
+     *
+     * @param string $query
+     * @param array $values
+     * @return \Khaled\PhpMvc\support\WithArrayAccess
      * @throws Exception
      */
     public function rawQuery(string $query, array $values = []): WithArrayAccess
@@ -57,9 +68,15 @@ class MysqlManager implements DatabaseManager
         }
     }
 
+    /**
+     * -
+     *
+     * @param array $data
+     * @return object|bool
+     */
     public function create(array $data): object|bool
     {
-        $query = MysqlGrammer::buildCreateQuery(array_keys($data));
+        $query = MysqlGrammar::buildCreateQuery(array_keys($data));
         $statement = self::$instance->prepare($query);
 
         foreach (array_values($data) as $index => $value) {
@@ -77,13 +94,20 @@ class MysqlManager implements DatabaseManager
         return false;
     }
 
+    /**
+     * -
+     *
+     * @param array|string $columns
+     * @param array $filters
+     * @return array
+     */
     public function get(array|string $columns = ['*'], array $filters = []): array
     {
         if (is_string($columns)) {
             $columns = explode(',', $columns);
         }
 
-        $query = MysqlGrammer::buildGetQuery($columns, array_keys($filters));
+        $query = MysqlGrammar::buildGetQuery($columns, array_keys($filters));
         $statement = self::$instance->prepare($query);
 
         if (!empty($filters)) {
@@ -97,9 +121,16 @@ class MysqlManager implements DatabaseManager
         return $statement->fetchAll(PDO::FETCH_CLASS, Model::getModel());
     }
 
+    /**
+     * -
+     *
+     * @param int $rowId
+     * @param array $data
+     * @return bool
+     */
     public function update(int $rowId, array $data): bool
     {
-        $query = MysqlGrammer::buildUpdateQuery(array_keys($data));
+        $query = MysqlGrammar::buildUpdateQuery(array_keys($data));
         $statement = self::$instance->prepare($query);
 
         Arr::each(
@@ -113,9 +144,15 @@ class MysqlManager implements DatabaseManager
         return $statement->execute();
     }
 
+    /**
+     * -
+     *
+     * @param int $id
+     * @return bool
+     */
     public function delete(int $id): bool
     {
-        $query = MysqlGrammer::buildDeleteQuery();
+        $query = MysqlGrammar::buildDeleteQuery();
         $statement = self::$instance->prepare($query);
         $statement->bindValue(1, $id);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Khaled\PhpMvc\support;
 
 use ArrayAccess;
 use Minwork\Helper\Arr;
@@ -36,19 +36,23 @@ class WithArrayAccess implements ArrayAccess
 
     // --------------------- Aliases for methods --------------------- //
 
-    public function exists(mixed $offset): bool {
+    public function exists(mixed $offset): bool
+    {
         return self::offsetExists($offset);
     }
 
-    public function get(mixed $offset): mixed {
+    public function get(mixed $offset): mixed
+    {
         return self::offsetGet($offset);
     }
 
-    public function set(mixed $offset, mixed $value): void {
+    public function set(mixed $offset, mixed $value): void
+    {
         self::offsetSet($offset, $value);
     }
 
-    public function unset(mixed $offset): void {
+    public function unset(mixed $offset): void
+    {
         self::offsetUnset($offset);
     }
 }

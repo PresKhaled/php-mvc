@@ -1,11 +1,17 @@
 <?php
 
-namespace Khaled\PhpMvc\database\grammers;
+namespace Khaled\PhpMvc\database\grammars;
 
-use App\Model;
+use App\models\Model;
 
-class MysqlGrammer
+class MysqlGrammar
 {
+    /**
+     * -
+     *
+     * @param array $columns
+     * @return string
+     */
     public static function buildCreateQuery(array $columns): string
     {
         $length = count($columns);
@@ -15,6 +21,13 @@ class MysqlGrammer
         return ('INSERT INTO ' . Model::getTableName() . " ($columns) VALUES($placeholders)");
     }
 
+    /**
+     * -
+     *
+     * @param array|string $columns
+     * @param array $filtersColumns
+     * @return string
+     */
     public static function buildGetQuery(array|string $columns = ['*'], array $filtersColumns = []): string
     {
         $columns = implode(', ', $columns);
@@ -33,6 +46,12 @@ class MysqlGrammer
         return $query;
     }
 
+    /**
+     * -
+     *
+     * @param array $columns
+     * @return string
+     */
     public static function buildUpdateQuery(array $columns): string
     {
         $placeholders = '';
@@ -44,6 +63,11 @@ class MysqlGrammer
         return ('UPDATE ' . Model::getTableName() . " SET $placeholders WHERE id = :id");
     }
 
+    /**
+     * -
+     *
+     * @return string
+     */
     public static function buildDeleteQuery(): string
     {
         return ('DELETE FROM ' . Model::getTableName() . " WHERE id = ?");

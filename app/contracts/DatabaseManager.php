@@ -2,8 +2,7 @@
 
 namespace App\contracts;
 
-use App\Model;
-use App\WithArrayAccess;
+use Khaled\PhpMvc\support\WithArrayAccess;
 use PDO;
 
 interface DatabaseManager

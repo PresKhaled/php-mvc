@@ -8,10 +8,12 @@ use JetBrains\PhpStorm\NoReturn;
 class InvokableController
 {
     /**
+     * -
+     *
      * @throws Exception
      */
     #[NoReturn] public function __invoke(): void
     {
-        view('invoked');
+        view('misc.invoked');
     }
 }

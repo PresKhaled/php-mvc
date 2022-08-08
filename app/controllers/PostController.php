@@ -8,9 +8,12 @@ use JetBrains\PhpStorm\NoReturn;
 class PostController
 {
     /**
+     * -
+     *
      * @throws Exception
      */
-    #[NoReturn] public function index(): void {
+    #[NoReturn] public function index(): void
+    {
         $posts = [
             ['id' => 1, 'title' => 'Post title', 'content' => 'Post content _' . random_int(11, 111)],
             ['id' => 2, 'title' => 'Post title 2', 'content' => 'Post content _' . random_int(11, 111)],
