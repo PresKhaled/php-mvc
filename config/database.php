@@ -1,4 +1,5 @@
 <?php
+// Example of the helper function 'config'.
 
 return [
     'host' => 'localhost',

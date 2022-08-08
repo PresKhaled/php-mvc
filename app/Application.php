@@ -28,16 +28,21 @@ class Application
     }
 
     /**
+     * Run the application.
+     *
      * @throws Exception
      */
     public function run(): void
     {
         $this->database->init();
         $this->route->resolve();
-
-        // ob_implicit_flush(false);
     }
 
+    /**
+     * -
+     *
+     * @return DatabaseManager
+     */
     private function getDatabaseEngine(): DatabaseManager
     {
         $engine = env('DB_ENGINE', 'mysql');

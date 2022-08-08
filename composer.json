@@ -9,7 +9,7 @@
             "Khaled\\PhpMvc\\": "src/"
         },
         "files": [
-            "app/helpers.php"
+          "src/support/helpers.php"
         ]
     },
     "authors": [

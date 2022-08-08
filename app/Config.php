@@ -2,10 +2,14 @@
 
 namespace App;
 
-use ArrayAccess;
-use Minwork\Helper\Arr;
 
-class Config extends WithArrayAccess {
+use Khaled\PhpMvc\support\WithArrayAccess;
+
+class Config extends WithArrayAccess
+{
+    /**
+     * @param array $items -
+     */
     public function __construct(array $items)
     {
         parent::__construct($items);

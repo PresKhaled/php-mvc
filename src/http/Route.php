@@ -11,8 +11,8 @@ class Route
     public static array $routes = [];
 
     /**
-     * @param Connection $connection
-     * @param Response $response
+     * @param Connection $connection -
+     * @param Response $response -
      */
     public function __construct(Connection $connection, Response $response)
     {
@@ -21,7 +21,7 @@ class Route
     }
 
     /**
-     *
+     * -
      *
      * @param string $uri
      * @param callable|array|string $action
@@ -34,7 +34,7 @@ class Route
     }
 
     /**
-     *
+     * -
      *
      * @param string $uri
      * @param callable|array|string $action
@@ -47,7 +47,7 @@ class Route
     }
 
     /**
-     *
+     * -
      *
      * @throws Exception
      */
@@ -81,6 +81,8 @@ class Route
         if (is_callable($action) || is_callable(($action = new $action))) {
             return call_user_func_array($action, [$connection]);
         }
+
+        throw new Exception;
     }
 
     /**

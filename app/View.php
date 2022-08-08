@@ -7,7 +7,7 @@ use Exception;
 class View
 {
     /**
-     *
+     * -
      *
      * @throws Exception
      */
@@ -32,17 +32,17 @@ class View
         return str_replace('{{CONTENT}}', $viewContent, $layout, $count);
     }
 
-    // NOTE: Not working properly in PHP 8.1.8 nor 8.1.9
     protected static function getLayout(): bool|string
     {
         ob_start();
 
-        require_once (views_path() . '/layouts/main.php');
+        require_once(views_path() . '/layouts/main.php');
 
         return ob_get_clean();
     }
 
-    protected static function getViewContent(string $path, array $params): bool|string {
+    protected static function getViewContent(string $path, array $params): bool|string
+    {
         extract($params);
 
         ob_start();
