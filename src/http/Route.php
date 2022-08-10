@@ -6,19 +6,13 @@ use Exception;
 
 class Route
 {
-    public Connection $connection;
-    public Response $response;
     public static array $routes = [];
 
     /**
      * @param Connection $connection -
      * @param Response $response -
      */
-    public function __construct(Connection $connection, Response $response)
-    {
-        $this->connection = $connection;
-        $this->response = $response;
-    }
+    public function __construct(public readonly Connection $connection, public readonly Response $response) {}
 
     /**
      * -

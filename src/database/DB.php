@@ -9,12 +9,7 @@ use Khaled\PhpMvc\support\WithArrayAccess;
 
 class DB
 {
-    protected DatabaseManager $manager;
-
-    public function __construct(DatabaseManager $manager)
-    {
-        $this->manager = $manager;
-    }
+    public function __construct(protected readonly DatabaseManager $manager) {}
 
     /**
      * -

@@ -25,7 +25,6 @@ class View
 
         $layout = self::getLayout();
         $viewContent = self::getViewContent($path, $params);
-        // dump($layout, $viewContent, str_replace('{{CONTENT}}', $viewContent, $layout));
 
         $count = 1;
 

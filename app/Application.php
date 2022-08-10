@@ -12,17 +12,14 @@ use Khaled\PhpMvc\http\Route;
 
 class Application
 {
-    public Connection $connection;
-    public Response $response;
-    public Session $session;
     protected Route $route;
-    public DB $database;
+    public readonly DB $database;
 
-    public function __construct()
-    {
-        $this->connection = new Connection;
-        $this->response = new Response;
-        $this->session = new Session;
+    public function __construct(
+        public readonly Connection $connection = new Connection,
+        public readonly Response $response = new Response,
+        public readonly Session $session = new Session,
+    ) {
         $this->route = new Route($this->connection, $this->response);
         $this->database = new DB($this->getDatabaseEngine());
     }
