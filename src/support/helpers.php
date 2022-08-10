@@ -40,7 +40,7 @@ if (!function_exists('base_path')) {
      */
     function base_path(): string
     {
-        return __DIR__ . '/mvc/';
+        return __DIR__ . '/../../';
     }
 }
 
