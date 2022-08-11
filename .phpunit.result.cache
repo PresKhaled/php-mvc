@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":[]}
+{"version":1,"defects":{"Warning":6,"FirstTest::test_ensure_true_equals_to_true":5,"UserTest::can_create_a_new_account":3},"times":{"Warning":0.004,"FirstTest::test_ensure_true_equals_to_true":0.004,"UserTest::can_create_a_new_account":0.06,"Tests\\unit\\UserTest::can_create_a_new_account":0.059}}

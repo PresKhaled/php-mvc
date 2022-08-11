@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app",
-            "Khaled\\PhpMvc\\": "src/"
+            "Khaled\\PhpMvc\\": "src/",
+            "Tests\\": "tests/"
         },
         "files": [
           "src/support/helpers.php"
