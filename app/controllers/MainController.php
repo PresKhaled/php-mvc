@@ -12,7 +12,7 @@ class MainController
      *
      * @throws Exception
      */
-    #[NoReturn] public function show(): void
+    #[NoReturn] public function show(): never
     {
         view('homepage');
     }

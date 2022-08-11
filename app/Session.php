@@ -8,8 +8,6 @@ class Session
 {
     public function __construct()
     {
-        session_start();
-
         if (isset($_SESSION[FLASH_MESSAGES_KEY])) {
             Arr::each(
                 $_SESSION[FLASH_MESSAGES_KEY],

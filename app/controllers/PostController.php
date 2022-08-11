@@ -12,7 +12,7 @@ class PostController
      *
      * @throws Exception
      */
-    #[NoReturn] public function index(): void
+    #[NoReturn] public function index(): never
     {
         $posts = [
             ['id' => 1, 'title' => 'Post title', 'content' => 'Post content _' . random_int(11, 111)],

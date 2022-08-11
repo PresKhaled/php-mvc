@@ -31,7 +31,7 @@ class Validator
                 $attachedField = $this->attachField($rawRule, $field, $attaches);
 
                 if ($attachedField) {
-                    $more = [$attachedField => $data[$attachedField]];
+                    $more = [$attachedField => ($data[$attachedField] ??= '')];
                 }
 
                 $valid = $rule->apply($field, $value, $rawRule, ($more ?? []));

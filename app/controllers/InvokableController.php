@@ -12,7 +12,7 @@ class InvokableController
      *
      * @throws Exception
      */
-    #[NoReturn] public function __invoke(): void
+    #[NoReturn] public function __invoke(): never
     {
         view('misc.invoked');
     }

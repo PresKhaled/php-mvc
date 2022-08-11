@@ -16,7 +16,7 @@ class RegisterController
      *
      * @throws Exception
      */
-    #[NoReturn] public function create(): void
+    #[NoReturn] public function create(): never
     {
         view('auth.register');
     }
