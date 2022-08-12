@@ -20,6 +20,8 @@ class Validator
         $validated = [];
 
         foreach ($fullRules as $field => $rules) {
+            $value = ($data[$field] ??= null);
+
             if (is_string($rules)) {
                 $rules = explode('|', $rules);
             }
@@ -27,7 +29,6 @@ class Validator
             foreach ($rules as $rawRule) {
                 $namespace = '\\App\\validation\\rules\\';
                 $rule = new ($namespace . (app_str_class_format($rawRule) . 'Rule'));
-                $value = ($data[$field] ??= null);
                 $attachedField = $this->attachField($rawRule, $field, $attaches);
 
                 if ($attachedField) {
@@ -37,14 +38,14 @@ class Validator
                 $valid = $rule->apply($field, $value, $rawRule, ($more ?? []));
 
                 if (!$valid) {
-                    $this->errors[$field][] = $messages[$field] ??= $rule->message($field);
+                    $this->errors[$field][] = ($messages[$field] ??= $rule->message($field));
                     continue;
                 }
+            }
 
-                // Avoid adding the field to the validated array if the field has another invalid rule.
-                if (!isset($this->errors[$field])) {
-                    $validated[$field] = $value;
-                }
+            // Avoid adding the field to the validated array if the field has another invalid rule.
+            if (!isset($this->errors[$field])) {
+                $validated[$field] = $value;
             }
         }
 
