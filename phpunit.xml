@@ -2,8 +2,9 @@
 <phpunit
     bootstrap="vendor/autoload.php"
     colors="true"
-    verbose="true"
+    verbose="false"
     stopOnFailure="false"
+    printerClass="NunoMaduro\Collision\Adapters\Phpunit\Printer"
 >
   <testsuites>
     <testsuite name="Unit tests">

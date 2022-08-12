@@ -44,6 +44,7 @@ class MysqlManager implements DatabaseManager
      * @param array $values
      * @return WithArrayAccess
      * @throws Exception
+     * @throws Throwable
      */
     public function rawQuery(string $query, array $values = []): WithArrayAccess
     {
@@ -56,15 +57,17 @@ class MysqlManager implements DatabaseManager
                 $statement->bindValue(($index + 1), $value);
             }
 
-            self::$instance->commit();
-
             $statement->execute();
 
-            return with_array_access($statement->fetchAll());
-        } catch (Throwable) {
+            self::$instance->commit();
+
+            $results = $statement->fetchAll();
+
+            return with_array_access($results);
+        } catch (Throwable $exception) {
             self::$instance->rollBack();
 
-            throw new Exception;
+            throw new $exception;
         }
     }
 

@@ -4,6 +4,7 @@ namespace Tests;
 
 use Dotenv\Dotenv;
 use Exception;
+use NunoMaduro\Collision\Provider;
 use PHPUnit\Framework\TestCase;
 
 class CustomTestCase extends TestCase
@@ -18,5 +19,7 @@ class CustomTestCase extends TestCase
         Dotenv::createImmutable(base_path())->safeLoad();
 
         app()->database->init();
+
+        (new Provider)->register();
     }
 }

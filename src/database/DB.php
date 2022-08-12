@@ -27,7 +27,7 @@ class DB
      * @param array $data
      * @return WithArrayAccess
      */
-    protected function rawQuery(string $query, array $data = []): WithArrayAccess
+    public function rawQuery(string $query, array $data = []): WithArrayAccess
     {
         return $this->manager->rawQuery($query, $data);
     }

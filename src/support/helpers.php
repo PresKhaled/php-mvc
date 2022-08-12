@@ -198,19 +198,17 @@ if (!function_exists('with_array_access')) {
     /**
      * -
      *
-     * @param array $results
-     * @return \Khaled\PhpMvc\support\WithArrayAccess
+     * @param array $items
+     * @return WithArrayAccess
      */
-    function with_array_access(array $results): WithArrayAccess
+    function with_array_access(array $items): WithArrayAccess
     {
-        $withArrayAccess = (new class extends WithArrayAccess {
-            public function __invoke(array $results)
+        return (new class($items) extends WithArrayAccess {
+            public function __construct(array $items)
             {
-                parent::__construct($results);
+                parent::__construct($items);
             }
         });
-
-        return $withArrayAccess($results);
     }
 }
 
