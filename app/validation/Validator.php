@@ -12,10 +12,9 @@ class Validator
      * @param array $fullRules
      * @param array $data
      * @param array|null $messages
-     * @param array $attaches Enable a field to access the value of another field.
      * @return array
      */
-    public function make(array $fullRules, array $data, ?array $messages = [], array $attaches = []): array
+    public function make(array $fullRules, array $data, ?array $messages = []): array
     {
         $validated = [];
 
@@ -29,7 +28,7 @@ class Validator
             foreach ($rules as $rawRule) {
                 $namespace = '\\App\\validation\\rules\\';
                 $rule = new ($namespace . (app_str_class_format($rawRule) . 'Rule'));
-                $attachedField = $this->attachField($rawRule, $field, $attaches);
+                $attachedField = $this->attachField($rawRule, $field);
 
                 if ($attachedField) {
                     $more = [$attachedField => ($data[$attachedField] ??= '')];
@@ -57,20 +56,17 @@ class Validator
      *
      * @param string $rule
      * @param string $field
-     * @param array $attaches
      * @return string
      */
-    protected function attachField(string $rule, string $field, array $attaches): string
+    protected function attachField(string $rule, string $field): string
     {
-        if ($rule === 'confirmed') {
-            $attachedField = $field . '_confirmation';
-        }
+        $rule = (($parts = explode(':', $rule))[0]);
 
-        if (array_key_exists($field, $attaches)) {
-            $attachedField = $attaches[$field];
-        }
-
-        return ($attachedField ?? '');
+        return match($rule) {
+            'confirmed' => ($field . '_confirmation'),
+            'same' => $parts[1],
+            default => '',
+        };
     }
 
     /**
