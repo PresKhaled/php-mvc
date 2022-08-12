@@ -12,7 +12,7 @@ use Khaled\PhpMvc\http\Route;
 
 class Application
 {
-    protected Route $route;
+    protected readonly Route $route;
     public readonly DB $database;
 
     public function __construct(
