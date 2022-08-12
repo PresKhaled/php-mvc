@@ -3,9 +3,7 @@
 namespace Tests\unit;
 
 use App\View;
-use Minwork\Helper\Arr;
 use ReflectionClass;
-use ReflectionMethod;
 use Tests\CustomTestCase;
 
 class ViewTest extends CustomTestCase
