@@ -42,7 +42,7 @@ class MysqlManager implements DatabaseManager
      *
      * @param string $query
      * @param array $values
-     * @return \Khaled\PhpMvc\support\WithArrayAccess
+     * @return WithArrayAccess
      * @throws Exception
      */
     public function rawQuery(string $query, array $values = []): WithArrayAccess

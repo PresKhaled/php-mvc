@@ -13,15 +13,7 @@ class View
      */
     public static function make(string $path, array $params = []): bool|string
     {
-        $path = (views_path() . '/' . str_replace('.', '/', $path));
-
-        if (is_dir($path)) {
-            $path .= '/index';
-        }
-
-        if (!is_file($path .= '.php')) {
-            throw new Exception("Target view (file): '$path' not found.");
-        }
+        $path = view_path($path);
 
         $layout = self::getLayout();
         $viewContent = self::getViewContent($path, $params);
@@ -35,7 +27,7 @@ class View
     {
         ob_start();
 
-        require_once(views_path() . '/layouts/main.php');
+        require(views_path() . '/layouts/main.php');
 
         return ob_get_clean();
     }
@@ -46,7 +38,7 @@ class View
 
         ob_start();
 
-        require_once $path;
+        require $path;
 
         return ob_get_clean();
     }

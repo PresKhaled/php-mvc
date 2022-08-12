@@ -68,6 +68,30 @@ if (!function_exists('parts_path')) {
     }
 }
 
+if (!function_exists('view_path')) {
+    /**
+     * -
+     *
+     * @param string $path
+     * @return string
+     * @throws Exception
+     */
+    function view_path(string $path): string
+    {
+        $path = (views_path() . '/' . str_replace('.', '/', $path));
+
+        if (is_dir($path)) {
+            $path .= '/index';
+        }
+
+        if (!is_file($path .= '.php')) {
+            throw new Exception("Target view (file): '$path' not found.");
+        }
+
+        return $path;
+    }
+}
+
 if (!function_exists('view')) {
     /**
      * -

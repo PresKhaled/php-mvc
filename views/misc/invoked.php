@@ -1,4 +1,4 @@
 <?php
 ?>
 
-<h1>Good smell</h1>
+<h1>Good smell (<?= $fragranceType ?>)</h1>

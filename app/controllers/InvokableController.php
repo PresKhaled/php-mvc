@@ -14,6 +14,6 @@ class InvokableController
      */
     #[NoReturn] public function __invoke(): never
     {
-        view('misc.invoked');
+        view('misc.invoked', ['fragranceType' => 'Vanilla']);
     }
 }
