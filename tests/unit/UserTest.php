@@ -13,7 +13,7 @@ class UserTest extends CustomTestCase
     {
         $data = [
             'name' => 'Khaled Mohsen',
-            'email' => 'pres.kbayomy@gmail.com',
+            'email' => (random_int(1000, 10000) . '@example.com'),
             'password' => 'password',
             'password_confirmation' => 'password',
         ];

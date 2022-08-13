@@ -11,7 +11,7 @@ class UniqueRuleTest extends CustomTestCase
     /** @test */
     public function it_returns_a_validation_error_message_when_the_field_value_already_exists()
     {
-        $email = ['email' => 'pres.kbayomy@gmail.com'];
+        $email = ['email' => (random_int(1000, 10000) . '@example.com')];
 
         // Register the E-Mail.
         User::create([
@@ -32,7 +32,7 @@ class UniqueRuleTest extends CustomTestCase
     public function it_succeeds_when_the_field_value_does_not_exist()
     {
         $validator = new Validator;
-        $validator->make(['email' => 'required|email|unique:users'], ['email' => 'pres.kbayomy@gmail.com']);
+        $validator->make(['email' => 'required|email|unique:users'], ['email' => (random_int(1000, 10000) . '@example.com')]);
 
         $this->assertFalse($validator->hasErrors());
         $this->assertEmpty($validator->errors);
