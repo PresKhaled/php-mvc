@@ -11,7 +11,7 @@ class BetweenRule implements RuleContract
     public function apply(string $field, mixed $value, string $rule, array $more = []): bool
     {
         $rule = explode(',', str_replace('between:', '', $rule));
-        $length = strlen($value);
+        $length = is_string($value) ? strlen($value) : $value;
         $min = $rule[0];
         $max = $rule[1];
 
