@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\unit;
+namespace Tests\unit\validation\rules;
 
 use App\validation\Validator;
 use Minwork\Helper\Arr;
